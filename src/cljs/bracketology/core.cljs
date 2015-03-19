@@ -5,8 +5,7 @@
 (enable-console-print!)
 
 (defonce app-state* (atom {:text "Hello FooBar!"
-                           :brackets [
-                                      [[["goo"
+                           :brackets [[[["goo"
                                          "bar"]
                                         ["biz"
                                          "boz"]]
@@ -33,9 +32,7 @@
                                          "boz"]]
                                        [["foo"
                                          "biz"]]
-                                       [["biz"]]]
-                                      ]}))
-
+                                       [["biz"]]]]}))
 
 
 (defn game
@@ -48,7 +45,7 @@
 
 (defn bracket
   [games idx]
-  (println idx)
+  (js/console.log "idx" idx)
   [:ul.col-sm-6
    (for [round (if (even? idx) games (reverse games))]
      ^{:key round}
@@ -60,11 +57,12 @@
 
 (defn app-view
   [app]
-  [:div.container
-   [:h1 "Bracket"]
-   (for [b (:brackets @app) idx (range (count (:brackets @app)))]
-     ^{:key b}
-     [bracket b idx])])
+  (let [i (atom -1)]
+    [:div.container
+     [:h1 "Bracket"]
+     (for [b (:brackets @app)]
+       ^{:key b}
+       [bracket b (swap! i inc)])]))
 
 
 (defn main []
