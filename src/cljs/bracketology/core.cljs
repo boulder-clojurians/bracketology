@@ -12,14 +12,21 @@
                                       ["aaa"
                                        "bbb"
                                        "ccc"
-                                       "ddd"]]}))
+                                       "ddd"]
+                                      ["xxx"
+                                       "yyy"
+                                       "zzz"
+                                       "qqq"]
+                                      ["xxx"
+                                       "yyy"
+                                       "zzz"
+                                       "qqq"]]}))
 
 
 
 (defn bracket
   [teams]
-  (println teams)
-  [:ul
+  [:ul.col-sm-6
    (for [team teams]
      [:li.team team])])
 
@@ -29,8 +36,7 @@
   [:div.container
    [:h1 "Bracket"]
    (for [b (:brackets @app)]
-     [bracket b])
-   ])
+     [bracket b])])
 
 
 (defn main []
